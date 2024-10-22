@@ -1,0 +1,73 @@
+﻿@model IEnumerable<cldv_poe.Models.Purchase>
+
+@{
+    ViewData["Title"] = "Purchases";
+}
+
+<h1>Purchases</h1>
+
+<p>
+    <form asp-action="ProcessPurchase" method="get" style="display:inline">
+        <button type="submit" class="btn btn-primary">New Purchase</button>
+    </form>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @{
+                        var purchaseDate = item.PurchaseDate.ToString("dd/MM/yyyy");
+                    }
+                    @purchaseDate
+                </td>
+                <td>
+                    <form asp-action="DetailPurchase" method="get" style="display:inline;">
+                        <input type="hidden" name="rowKey" value="@item.RowKey" />
+                        <button type="submit" class="btn btn-info">Details</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

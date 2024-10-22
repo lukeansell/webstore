@@ -1,0 +1,82 @@
+﻿@model IEnumerable<cldv_poe.Models.Product>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<h1>Products</h1>
+
+<p>
+    <form asp-action="AddProduct" method="get" style="display:inline;">
+        <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="@item.ImageUrl" alt="@item.ProductName" style="width:100px;height:auto" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    <form asp-action="DeleteProduct" method="post" style="display:inline;">
+                        <input type="hidden" name="rowKey" value="@item.RowKey" />
+                        <input type="hidden" name="ImageUrl" value="@item.ImageUrl" />
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Product');">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="UpdateProduct" method="get" style="display:inline;">
+                        <input type="hidden" name="rowKey" value="@item.RowKey" />
+                        <button type="submit" class="btn btn-secondary">Update</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

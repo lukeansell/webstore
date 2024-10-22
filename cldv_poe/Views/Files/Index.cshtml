@@ -1,0 +1,57 @@
+﻿@model List<cldv_poe.Models.FileModel>
+
+@{
+    ViewData["Title"] = "Files";
+    var dirs = ViewData["Dirs"] as List<string>;
+}
+
+<h1>Files</h1>
+
+<!-- Display any messages -->
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+}
+
+<!-- Upload form -->
+<form asp-controller="Files" asp-action="Upload" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <select name="dirName" asp-items="@(new SelectList(dirs))">
+            <option value="">--- Select Directory ---</option>
+        </select>
+        <label for="file">Choose file to upload</label>
+        <input type="file" id="file" name="file" class="form-control" />
+        @* <input type="hidden" name="dirName" value="uploads" /> *@
+        <button type="submit" class="btn btn-primary mt-2">Upload</button>
+    </div>
+</form>
+<br />
+
+<!-- Display uploaded files -->
+@if (Model != null && Model.Count > 0)
+{
+    <ul>
+        @foreach (var file in Model)
+        {
+            <li>
+                <form asp-controller="Files" asp-action="DownloadFile" style="display:inline;" method="get">
+                    <input type="hidden" name="fName" value="@file.Name" />
+                    <input type="hidden" name="dirName" value="@file.Dir" />
+                    <button type="submit" class="btn btn-secondary small">Download</button>
+                </form>
+                @file.Dir -
+                @file.Name -
+                Size: @file.DisplaySize -
+                Last Modified: @file.LastModified?.ToString("g")
+
+            </li>
+            <br />
+        }
+    </ul>
+}
+else
+{
+    <p>No files found</p>
+}

@@ -1,0 +1,94 @@
+﻿@model cldv_poe.Models.Purchase
+
+@{
+    ViewData["Title"] = "Purchase Details";
+    var customer = ViewData["Customer"] as cldv_poe.Models.Customer;
+    if (customer == null)
+        customer = new Customer();
+    var product = ViewData["Product"] as cldv_poe.Models.Product;
+    if (product == null)
+        product = new Product();
+}
+
+<h1>Purchase Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.PurchaseID)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.PurchaseID)
+        </dd>
+        <dt class="col-sm-3">
+            <u>Customer</u>
+        </dt>
+        <dd class="col-sm-9"></dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => customer.CustomerName)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => customer.CustomerName)
+        </dd>
+        <dt class="col-sm-3">
+            <u>Product</u>
+        </dt>
+        <dd class="col-sm-9">
+
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ProductID)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ProductID)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => product.ProductName)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => product.ProductName)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => product.Price)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => product.Price)
+        </dd>
+        <dt class="col-sm-3">
+            <u>Purchase</u>
+        </dt>
+        <dd class="col-sm-9"></dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </dt>
+        <dd class="col-sm-9">
+            @{
+                var purchaseDate = Model.PurchaseDate.ToString("dd/MM/yyyy");
+            }
+            @purchaseDate
+        </dd>
+    </dl>
+</div>
+<div>
+
+    <a asp-action="Index">Back to List</a>
+</div>

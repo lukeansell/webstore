@@ -1,0 +1,58 @@
+﻿@model cldv_poe.Models.Product
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<h1>Add Product</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddProduct" method="post" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" type="text" name="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductDescription" class="control-label"></label>
+                <input asp-for="ProductDescription" type="text" name="ProductDescription" class="form-control" />
+                <span asp-validation-for="ProductDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <input asp-for="Category" type="text" name="Category" class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Image</label>
+                <input type="file" name="file" required class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" type="text" name="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock" class="control-label"></label>
+                <input asp-for="Stock" type="text" name="Stock" class="form-control" />
+                <span asp-validation-for="Stock" class="text-danger"></span>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary"> Add Product</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
